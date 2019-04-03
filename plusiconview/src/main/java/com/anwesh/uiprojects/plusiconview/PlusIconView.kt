@@ -118,4 +118,48 @@ class PlusIconView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    data class PINode(var i : Int, val state : State = State()) {
+
+        private var next : PINode? = null
+        private var prev : PINode? = null
+
+        init {
+
+        }
+
+        fun addNeighbor() {
+            if (i < nodes - 1) {
+                next = PINode(i + 1)
+                next?.prev = this
+            }
+        }
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            canvas.drawPINode(i, state.scale, paint)
+            prev?.draw(canvas, paint)
+        }
+
+        fun update(cb : (Int, Float) -> Unit) {
+            state.update {
+                cb(i, it)
+            }
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            state.startUpdating(cb)
+        }
+
+        fun getNext(dir : Int, cb : () -> Unit) : PINode {
+            var curr : PINode? = prev
+            if (dir == 1) {
+                curr = next
+            }
+            if (curr != null) {
+                return curr
+            }
+            cb()
+            return this 
+        }
+    }
 }
