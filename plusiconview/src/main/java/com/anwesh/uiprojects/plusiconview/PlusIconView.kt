@@ -22,7 +22,7 @@ val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#1565C0")
 val backColor : Int = Color.parseColor("#BDBDBD")
 val plusSizeFactor : Float = 1.6f
-val delay : Long = 15
+val delay : Long = 10
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
