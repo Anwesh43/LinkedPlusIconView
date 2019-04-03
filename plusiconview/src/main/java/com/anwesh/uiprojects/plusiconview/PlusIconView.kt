@@ -207,4 +207,13 @@ class PlusIconView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : PlusIconView {
+            val view : PlusIconView = PlusIconView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
