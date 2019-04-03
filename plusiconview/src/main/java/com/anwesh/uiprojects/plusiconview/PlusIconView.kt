@@ -45,11 +45,29 @@ fun Canvas.drawPINode(i : Int, scale : Float, paint : Paint) {
     translate(gap * (i + 1), h / 2)
     drawArc(RectF(-size, -size, size, size), 0f, 360f * sc1, true, paint)
     for (j in 0..(lines - 1)) {
-        paint.color = backColor 
+        paint.color = backColor
         save()
         rotate(90f * j)
         drawLine(0f, 0f, plusSize * sc2.divideScale(j, lines), 0f, paint)
         restore()
     }
     restore()
+}
+
+class PlusIconView(ctx : Context) : View(ctx) {
+
+    private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
 }
