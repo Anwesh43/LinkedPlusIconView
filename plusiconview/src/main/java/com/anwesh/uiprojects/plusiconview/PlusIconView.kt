@@ -184,4 +184,26 @@ class PlusIconView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : PlusIconView) {
+
+        private val animator : Animator = Animator(view)
+        private val pi : PlusIcon = PlusIcon(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            pi.draw(canvas, paint)
+            animator.animate {
+                pi.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            pi.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
